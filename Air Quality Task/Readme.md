@@ -1,226 +1,170 @@
-# Air Quality Prediction Project
-
-A comprehensive project for air quality prediction using traditional machine learning (Prophet) and deep learning (LSTM) models. This repository provides step-by-step code structure, from data exploration to model comparison and interactive dashboards.
+**Air Quality Prediction and Forecasting System**
 
 ---
 
-## 📋 Table of Contents
+## 🚀 Project Overview
 
-1. [Project Overview](#project-overview)
-2. [Prerequisites](#prerequisites)
-3. [Installation](#installation)
-4. [Usage](#usage)
-5. [Section Breakdown](#section-breakdown)
+Air quality is a critical environmental and public health indicator. This project analyzes air quality data from 26 Indian cities (January 2021 – December 2022) to:
 
-   * [1. Workspace Setup](#1-workspace-setup)
-   * [2. Data Understanding and Exploration](#2-data-understanding-and-exploration)
-   * [3. Data Preprocessing](#3-data-preprocessing)
-   * [4. Feature Engineering](#4-feature-engineering)
-   * [5. Traditional ML Data Splitting](#5-traditional-ml-data-splitting)
-   * [6. Prophet Time Series Forecasting](#6-prophet-time-series-forecasting)
-   * [7. Prophet Model Evaluation](#7-prophet-model-evaluation)
-   * [8. Comprehensive Visualizations](#8-comprehensive-visualizations)
-   * [9. Prophet Components Analysis](#9-prophet-components-analysis)
-   * [10. Future Predictions (Extra Challenge 1)](#10-future-predictions-extra-challenge-1)
-   * [11. LSTM Deep Learning Model (Extra Challenge 3)](#11-lstm-deep-learning-model-extra-challenge-3)
-   * [12. Comprehensive Model Comparison](#12-comprehensive-model-comparison)
-   * [13. Interactive Dashboard (Extra Challenge 2)](#13-interactive-dashboard-extra-challenge-2)
-   * [14. Results Export and Documentation](#14-results-export-and-documentation)
-6. [Files and Outputs](#files-and-outputs)
-7. [License](#license)
+* **Preprocess** and clean raw pollutant measurements (e.g., CO, NO₂, PM₂.₅).
+* **Engineer features** and prepare both tabular and time-series datasets.
+* Build and evaluate two forecasting models:
+
+  1. **Prophet** (Facebook-developed time-series model)
+  2. **LSTM** (Long Short-Term Memory neural network)
+* **Compare** model performance and select the best for accurate short-term air quality forecasts.
 
 ---
 
-## Project Overview
+## 📁 Repository Structure
 
-This project implements both Facebook Prophet and LSTM models to forecast air quality (PM2.5) levels based on historical data. It includes data exploration, preprocessing, feature engineering, model training, evaluation, visualization, and deployment-ready exports.
-
----
-
-## Prerequisites
-
-* Python 3.8+
-* Pip package manager
-
-**Required Libraries:**
-
-```bash
-pip install pandas numpy matplotlib seaborn scikit-learn prophet tensorflow
+```
+├── data/                       # Raw and processed CSV files
+│   ├── air_quality_raw.csv     # Original measurements
+│   ├── air_quality_preprocessed.csv
+│   ├── air_quality_features.csv
+│   └── future_predictions_7_days.csv
+│
+├── notebooks/                  # Jupyter notebooks
+│   ├── data_preprocessing.ipynb
+│   ├── feature_engineering.ipynb
+│   ├── prophet_model.ipynb
+│   └── lstm_model.ipynb
+│
+├── models/                     # Trained model artifacts
+│   ├── prophet_model.pkl
+│   └── lstm_air_quality_model.h5
+│
+├── outputs/                    # Exported results and metrics
+│   ├── air_quality_predictions_complete.csv
+│   └── model_comparison_metrics.csv
+│
+├── requirements.txt            # Python dependencies
+├── environment.yml             # Conda environment file (optional)
+├── train.py                    # Script to run full pipeline end-to-end
+└── README.md                   # Project overview and instructions
 ```
 
 ---
 
-## Installation
+## 🛠️ Installation & Setup
 
-1. Clone the repository:
+1. **Clone the repository**:
 
    ```bash
+   git clone https://github.com/username/air-quality-forecast.git
+   cd air-quality-forecast
    ```
 
-git clone [https://github.com/yourusername/air-quality-prediction.git](https://github.com/yourusername/air-quality-prediction.git)
-cd air-quality-prediction
+2. **Install dependencies**:
 
-````
-2. Install dependencies (see Prerequisites).
-3. Ensure your dataset file is named `air_pollution_data.csv` and placed in the project root.
+   ```bash
+   pip install -r requirements.txt
+   # or using Conda
+   conda env create -f environment.yml
+   conda activate air-quality
+   ```
 
----
+3. **Run the full pipeline**:
 
-## Usage
-Run the analysis script:
-```bash
-python air_quality_analysis.py
-````
-
-Results, visualizations, and exported files will be generated in the `outputs/` directory.
+   ```bash
+   python train.py
+   ```
 
 ---
 
-## Section Breakdown
+## 🧹 Data Preprocessing
 
-### 1. Workspace Setup
+* **Dataset shape**: 23,504 records × 11 features
+* **Cities covered**: 26
+* **Date range**: 2020-11-30 – 2023-05-25
 
-* Imports and environment configuration.
-* Display settings optimization.
-
-*Placeholder for setup environment screenshot:*
-`![Workspace Setup](path/to/setup_image.png)`
-
----
-
-### 2. Data Understanding and Exploration
-
-* Load dataset and inspect shape, records, and date range.
-* Display head, info, summary statistics, missing values, and invalid values analysis.
-
-*Add exploratory plots:*
-`![Exploration Plot](path/to/exploration_plot.png)`
+1. **Invalid value handling**: Replaced sentinel `-200` values with `NaN` (none found).
+2. **Datetime conversion**: Transformed `DD-MM-YYYY` strings to `YYYY-MM-DD HH:MM:SS` and sorted chronologically.
+3. **Final shape**: 23,504 rows × 12 columns (date column as datetime).
 
 ---
 
-### 3. Data Preprocessing
+## ✨ Feature Engineering
 
-* Replace invalid values (-200) with NaN.
-* Fill missing values with column means.
-* Convert date column to datetime and sort chronologically.
-
-*Include preprocessing pipeline diagram:*
-`![Preprocessing Diagram](path/to/preprocessing_diagram.png)`
+* **Target variable**: `pm2_5`
+* **Features**: `['co', 'no', 'no2', 'o3', 'so2', 'pm10', 'nh3', 'aqi']`
+* **Scaling**: StandardScaler (zero mean, unit variance)
+* **Time-series aggregation**: Daily national average PM₂.₅ for Prophet (`904` days)
 
 ---
 
-### 4. Feature Engineering
+## 🤖 Model Development & Evaluation
 
-* Define features and target variable.
-* Scale features using `StandardScaler`.
-* Aggregate daily national averages for Prophet model.
+### 1. Time-Series Model: Prophet
 
-*Visual of feature distributions:*
-`![Feature Distribution](path/to/feature_distribution.png)`
+* **Train/Test split**: 723 days (train), 181 days (test)
+* **Metrics (test)**:
 
----
+  * MAE: 22.24 μg/m³
+  * RMSE: 28.36 μg/m³
+  * R²: 0.7016 (Good performance)
 
-### 5. Traditional ML Data Splitting
+### 2. Deep Learning Model: LSTM
 
-* Split data into training and testing sets preserving time order.
+* **Sequence length**: 30 days
+* **Train/Test split**: 693 sequences (train), 181 sequences (test)
+* **Architecture**: Two stacked LSTM layers + Dense output
+* **Metrics (test)**:
 
-*Data split summary image:*
-`![Data Split](path/to/data_split_image.png)`
+  * MAE: 20.70 μg/m³
+  * RMSE: 27.24 μg/m³
+  * R²: 0.7247
 
----
+### 📊 Model Comparison
 
-### 6. Prophet Time Series Forecasting
+| Model   | MAE (μg/m³) | RMSE (μg/m³) | R² Score |
+| ------- | ----------: | -----------: | -------: |
+| Prophet |       22.24 |        28.36 |    0.702 |
+| LSTM    |       20.70 |        27.24 |    0.725 |
 
-* Train Prophet model with yearly and weekly seasonality.
-* Generate forecast and future dataframe.
+**LSTM improved** over Prophet by:
 
-*Prophet forecast plot:*
-`![Prophet Forecast](path/to/prophet_forecast.png)`
+* MAE: +6.9%
+* RMSE: +4.0%
+* R²: +3.3%
 
----
-
-### 7. Prophet Model Evaluation
-
-* Compute MAE, RMSE, R² for train and test sets.
-* Performance interpretation.
-
-*Evaluation metrics table screenshot:*
-`![Prophet Metrics](path/to/prophet_metrics.png)`
-
----
-
-### 8. Comprehensive Visualizations
-
-* Dashboard with time series actual vs predicted, scatter plots, residuals, error distribution, metrics comparison, and summary.
-
-*Complete dashboard visual:*
-`![Dashboard](path/to/dashboard_complete.png)`
+**Selected best model**: **LSTM**
 
 ---
 
-### 9. Prophet Components Analysis
+## 🌤️ Future Predictions
 
-* Plot trend, yearly, and weekly seasonal components.
+* **Next 7 days forecast** of average PM₂.₅ levels:
 
-*Seasonal decomposition plot:*
-`![Components](path/to/components_plot.png)`
+  | Date       | PM₂.₅ (μg/m³) | Air Quality Category       |
+  | ---------- | ------------: | -------------------------- |
+  | 2023-05-24 |          60.5 | 🟠 Unhealthy for Sensitive |
+  | 2023-05-25 |          62.4 | 🟠 Unhealthy for Sensitive |
+  | 2023-05-26 |          64.5 | 🟠 Unhealthy for Sensitive |
+  | 2023-05-27 |          60.9 | 🟠 Unhealthy for Sensitive |
+  | 2023-05-28 |          46.2 | 🟡 Moderate                |
+  | 2023-05-29 |          45.6 | 🟡 Moderate                |
+  | 2023-05-30 |          62.4 | 🟠 Unhealthy for Sensitive |
 
----
-
-### 10. Future Predictions (Extra Challenge 1)
-
-* Forecast next 7 days and categorize air quality.
-* Plot future predictions with confidence intervals.
-
-*7-day forecast visualization:*
-`![7 Day Forecast](path/to/7day_forecast.png)`
-
----
-
-### 11. LSTM Deep Learning Model (Extra Challenge 3)
-
-* Prepare sequential data.
-* Build and train LSTM model.
-* Evaluate LSTM performance.
-
-*LSTM architecture diagram and loss curve:*
-`![LSTM Model](path/to/lstm_model.png)`
+*Confidence intervals included in outputs.*
 
 ---
 
-### 12. Comprehensive Model Comparison
+## 📈 Visualizations
 
-* Compare Prophet vs. LSTM metrics and improvements.
-* Visualization of performance metrics and characteristics.
+> *Add your plots and figures here.*
 
-*Comparison bar charts:*
-`![Model Comparison](path/to/model_comparison.png)`
-
----
-
-### 13. Interactive Dashboard (Extra Challenge 2)
-
-* Combined dashboard with historical data, predictions, trend, seasonality, city-wise analysis, and performance dashboard.
-
-*Interactive dashboard preview:*
-`![Interactive Dashboard](path/to/interactive_dashboard.png)`
+* ![Pollutant Trends](notebooks/figures/pollutant_trends.png)
+* ![Feature Correlation](notebooks/figures/correlation_matrix.png)
+* ![Prophet Forecast vs Actual](notebooks/figures/prophet_forecast.png)
+* ![LSTM Loss Curves](notebooks/figures/lstm_train_val_loss.png)
 
 ---
 
-### 14. Results Export and Documentation
+## 💾 Output Files
 
-* Export prediction results and metrics to CSV.
-* Save LSTM model for deployment.
-
-*Exported files overview:*
-`![Export Files](path/to/exported_files.png)`
-
----
-
-## Files and Outputs
-
-* `air_quality_analysis.py` - Main analysis script.
-* `outputs/air_quality_predictions_complete.csv` - Prediction results.
-* `outputs/future_predictions_7_days.csv` - Future forecast.
-* `outputs/model_comparison_metrics.csv` - Model metrics comparison.
-* `lstm_air_quality_model.h5` - Saved LSTM model.
+* `air_quality_predictions_complete.csv`
+* `future_predictions_7_days.csv`
+* `model_comparison_metrics.csv`
+* `lstm_air_quality_model.h5`
