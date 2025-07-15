@@ -1,0 +1,47 @@
+Project: Bitcoin Price Prediction using
+Machine Learning
+• Objective: Develop a machine learning model to predict Bitcoin price trends
+based on historical data, helping traders make informed investment
+decisions.
+• Dataset: Bitcoin Historical Price Dataset
+Project Goals:
+1. Importing Necessary Libraries and Dataset:
+• Load required Python libraries:
+o Pandas for handling datasets.
+o NumPy for numerical operations.
+o Matplotlib/Seaborn for data visualization.
+o Sklearn for data preprocessing, model training, and evaluation.
+o XGBoost for high-performance machine learning prediction.
+• Load the dataset using Pandas and check its structure.
+2. Data Preprocessing:
+• Handle missing values by filling them with previous data points.
+• Convert date columns into DateTime format and set as index.
+• Normalize numerical features using MinMaxScaler for uniform scaling.
+• Create new features like Moving Averages (SMA, EMA), Bollinger Bands, and
+RSI.
+• Split dataset into training (80%) and testing (20%) sets.
+3. Exploratory Data Analysis (EDA):
+• Visualize Bitcoin price trends over time using line charts.
+• Analyze the impact of volume, volatility, and historical patterns on price
+changes.
+• Identify correlations between different technical indicators.
+4. Model Training and Selection:
+• Train different machine learning models:
+o Linear Regression
+o Random Forest
+o Support Vector Machine (SVM)
+o XGBoost (Extreme Gradient Boosting)
+o LSTM (Long Short-Term Memory) for deep learning
+• Compare model performance using RMSE (Root Mean Squared Error).
+5. Model Evaluation and Prediction:
+• Evaluate the best model based on:
+o Mean Absolute Error (MAE)
+o Mean Squared Error (MSE)
+o R² Score
+• Predict Bitcoin price trends using real-time data from APIs (e.g., Binance,
+CoinGecko).
+Conclusion:
+• This model helps traders predict Bitcoin price trends based on past
+patterns.
+• Future improvements can include deep learning models like LSTMs or
+Transformers for better accuracy.
