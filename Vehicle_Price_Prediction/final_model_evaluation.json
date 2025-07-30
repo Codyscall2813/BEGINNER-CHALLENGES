@@ -1,0 +1,304 @@
+{
+  "model_type": "RandomForestRegressor",
+  "model_parameters": {
+    "bootstrap": true,
+    "ccp_alpha": 0.0,
+    "criterion": "squared_error",
+    "max_depth": 15,
+    "max_features": 0.3,
+    "max_leaf_nodes": null,
+    "max_samples": null,
+    "min_impurity_decrease": 0.0,
+    "min_samples_leaf": 1,
+    "min_samples_split": 2,
+    "min_weight_fraction_leaf": 0.0,
+    "monotonic_cst": null,
+    "n_estimators": 200,
+    "n_jobs": -1,
+    "oob_score": false,
+    "random_state": 42,
+    "verbose": 0,
+    "warm_start": false
+  },
+  "performance_metrics": {
+    "train_rmse": 2321.11994901465,
+    "test_rmse": 7196.0067214787705,
+    "test_mae": 3887.4223516618895,
+    "test_r2": 0.8653079081368027,
+    "cv_rmse": 6270.822017758681,
+    "cv_std": 1610.8938191052512
+  },
+  "feature_importance": [
+    {
+      "feature": "model_encoded",
+      "importance": 0.33718255132604513
+    },
+    {
+      "feature": "trim_encoded",
+      "importance": 0.23909961749689906
+    },
+    {
+      "feature": "exterior_color_encoded",
+      "importance": 0.09326166919571394
+    },
+    {
+      "feature": "make_encoded",
+      "importance": 0.08066515617909359
+    },
+    {
+      "feature": "interior_color_encoded",
+      "importance": 0.047762066845710695
+    },
+    {
+      "feature": "cylinders",
+      "importance": 0.033512250408118234
+    },
+    {
+      "feature": "mileage",
+      "importance": 0.02353087621059664
+    },
+    {
+      "feature": "fuel_Electric",
+      "importance": 0.012820704800181208
+    },
+    {
+      "feature": "engine_size_category_Medium",
+      "importance": 0.012255852693816642
+    },
+    {
+      "feature": "body_Sedan",
+      "importance": 0.0118475333912351
+    },
+    {
+      "feature": "is_turbo",
+      "importance": 0.009259496856465271
+    },
+    {
+      "feature": "fuel_Gasoline",
+      "importance": 0.00790862016758283
+    },
+    {
+      "feature": "drivetrain_Front-wheel Drive",
+      "importance": 0.007549131180180927
+    },
+    {
+      "feature": "luxury_engine_interaction",
+      "importance": 0.007337615113063539
+    },
+    {
+      "feature": "is_luxury",
+      "importance": 0.006965616708858553
+    },
+    {
+      "feature": "luxury_fuel_interaction",
+      "importance": 0.0066842592171042405
+    },
+    {
+      "feature": "drivetrain_Four-wheel Drive",
+      "importance": 0.004748834610889318
+    },
+    {
+      "feature": "has_awd_4wd",
+      "importance": 0.0044803447732209255
+    },
+    {
+      "feature": "transmission_Automatic",
+      "importance": 0.0040756055853311225
+    },
+    {
+      "feature": "is_premium_body",
+      "importance": 0.003932492705637544
+    },
+    {
+      "feature": "has_luxury",
+      "importance": 0.00389924338499434
+    },
+    {
+      "feature": "engine_displacement",
+      "importance": 0.0038515322509188156
+    },
+    {
+      "feature": "body_SUV",
+      "importance": 0.0036546679180009278
+    },
+    {
+      "feature": "is_diesel_engine",
+      "importance": 0.0033732763351337265
+    },
+    {
+      "feature": "premium_body_awd",
+      "importance": 0.002901636023108357
+    },
+    {
+      "feature": "doors",
+      "importance": 0.002859641033111439
+    },
+    {
+      "feature": "mileage_category_New",
+      "importance": 0.002473777618379723
+    },
+    {
+      "feature": "engine_size_category_V8_Plus",
+      "importance": 0.002418461582838231
+    },
+    {
+      "feature": "mileage_category_Nearly_New",
+      "importance": 0.002363445960334956
+    },
+    {
+      "feature": "body_Pickup Truck",
+      "importance": 0.0023110786715423736
+    },
+    {
+      "feature": "fuel_Hybrid",
+      "importance": 0.0021897081621055827
+    },
+    {
+      "feature": "has_sport",
+      "importance": 0.0019323992104850014
+    },
+    {
+      "feature": "year",
+      "importance": 0.0017812759906810126
+    },
+    {
+      "feature": "drivetrain_Rear-wheel Drive",
+      "importance": 0.0016102611043108698
+    },
+    {
+      "feature": "is_hybrid_engine",
+      "importance": 0.0014047079629636021
+    },
+    {
+      "feature": "vehicle_age",
+      "importance": 0.0013016977225564271
+    },
+    {
+      "feature": "mileage_category_Low_Mileage",
+      "importance": 0.0010657818113647408
+    },
+    {
+      "feature": "transmission_6-Spd Aisin F21-250 PHEV Auto Trans",
+      "importance": 0.0007032030057084586
+    },
+    {
+      "feature": "mileage_category_Medium_Mileage",
+      "importance": 0.0006756643894313796
+    },
+    {
+      "feature": "engine_size_category_Small",
+      "importance": 0.0005745415798358567
+    },
+    {
+      "feature": "transmission_7-Speed Automatic S tronic",
+      "importance": 0.0003886818260308784
+    },
+    {
+      "feature": "body_Hatchback",
+      "importance": 0.00033573799270384064
+    },
+    {
+      "feature": "transmission_10-Speed Shiftable Automatic",
+      "importance": 0.00027825764481266156
+    },
+    {
+      "feature": "body_Passenger Van",
+      "importance": 0.00018824904537486902
+    },
+    {
+      "feature": "transmission_7-Speed DSGA? Automatic w/ 4MO",
+      "importance": 0.00014439156412101163
+    },
+    {
+      "feature": "has_performance",
+      "importance": 0.00010260741670716857
+    },
+    {
+      "feature": "transmission_8 Speed Dual Clutch",
+      "importance": 8.647832546106479e-05
+    },
+    {
+      "feature": "transmission_8-Speed A/T",
+      "importance": 5.350857821768541e-05
+    },
+    {
+      "feature": "transmission_automatic w/paddle shifters",
+      "importance": 3.683640253014543e-05
+    },
+    {
+      "feature": "transmission_7-Speed DSG Automatic with Tiptronic",
+      "importance": 2.754673619215795e-05
+    },
+    {
+      "feature": "transmission_6-Speed A/T",
+      "importance": 2.5649465279703744e-05
+    },
+    {
+      "feature": "fuel_E85 Flex Fuel",
+      "importance": 2.130028657139945e-05
+    },
+    {
+      "feature": "body_Convertible",
+      "importance": 1.8426600966460074e-05
+    },
+    {
+      "feature": "transmission_62 kWh battery",
+      "importance": 1.8378096294694304e-05
+    },
+    {
+      "feature": "transmission_7-Speed Automatic with Auto-Shift",
+      "importance": 1.6601052264133965e-05
+    },
+    {
+      "feature": "transmission_9 Spd Automatic",
+      "importance": 1.4814533547000845e-05
+    },
+    {
+      "feature": "transmission_6-Speed DCT Automatic",
+      "importance": 8.154942150410797e-06
+    },
+    {
+      "feature": "transmission_A/T",
+      "importance": 3.3121332507443913e-06
+    },
+    {
+      "feature": "transmission_8-Speed Shiftable Automatic",
+      "importance": 2.8496227626555984e-06
+    },
+    {
+      "feature": "transmission_9-Speed 948TE Automatic",
+      "importance": 1.920551211116856e-06
+    },
+    {
+      "feature": "body_Minivan",
+      "importance": 0.0
+    },
+    {
+      "feature": "transmission_9-Speed A/T",
+      "importance": 0.0
+    }
+  ],
+  "prediction_interval_coverage": 82.6530612244898,
+  "price_range_performance": {
+    "Budget (<$40K)": {
+      "mae": 2862.537963953597,
+      "mape": 9.64080622399246,
+      "count": 66
+    },
+    "Mid-range ($40K-$60K)": {
+      "mae": 2670.6922684194215,
+      "mape": 5.347377741672217,
+      "count": 84
+    },
+    "Premium ($60K-$100K)": {
+      "mae": 5422.9197169008185,
+      "mape": 7.274510358875871,
+      "count": 42
+    },
+    "Luxury ($100K+)": {
+      "mae": 30226.624161931817,
+      "mape": 23.257471852657893,
+      "count": 4
+    }
+  }
+}
